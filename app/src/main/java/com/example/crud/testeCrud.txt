@@ -1,0 +1,22 @@
+   //TESTE INSERT
+        /*
+        bd.insertCliente(new Cliente("Vinicius Souza","vinicius@hotmail.com","11997923572"));
+        System.out.println(bd);
+        System.out.println("BANANA");
+        Toast.makeText(MainActivity.this, "Salvo com sucesso!", Toast.LENGTH_LONG).show();
+        */
+
+        //TESTE DELETE
+        /*
+        Cliente cliente = new Cliente();
+        cliente.setIdcliente(2);
+        bd.deleteCliente(cliente);
+        Toast.makeText(MainActivity.this, "Excluido com sucesso!", Toast.LENGTH_LONG).show();
+        */
+
+        //TESTE SELECT
+        /*
+        Cliente cliente = bd.vertorCliente(8);
+        Toast.makeText(MainActivity.this, cliente.getIdcliente() + " " +cliente.getNome() + " " +cliente.getTelefone() + " " +cliente.getEmail(), Toast.LENGTH_LONG).show();
+
+        */
