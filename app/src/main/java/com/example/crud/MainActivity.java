@@ -38,13 +38,37 @@ public class MainActivity extends AppCompatActivity {
         TextIdNumber = findViewById(R.id.TextIdNumber);
 
         btnSalvar = (Button) findViewById(R.id.btnSalvar);
-        //btnAlterar = (Button) findViewById(R.id.btnAlterar);
         btnLista = (Button) findViewById(R.id.btnLista);
         btnExcluir = (Button) findViewById(R.id.btnExcluir);
 
-        listViewClientes = (ListView) findViewById(R.id.listViewClientes2);
-
+        listViewClientes = (ListView) findViewById(R.id.listViewClientes1);
+        limparCampos();
         listarTodos();
+
+        //******RECEBER DADOS DA OUTRA TELA *********
+
+        String idClienteLista = getIntent().getStringExtra("TextIdNumber");
+        String nomeLista = getIntent().getStringExtra("TextName");
+        String emailLista = getIntent().getStringExtra("TextEmailAddress");
+        String phoneLista = getIntent().getStringExtra("TextPhone");
+
+        if(nomeLista != null) {
+            TextName.setText(nomeLista);
+        }
+        if(idClienteLista != null) {
+            TextIdNumber.setText(idClienteLista);
+        }
+
+        if(emailLista != null) {
+            TextEmailAddress.setText(emailLista);
+        }
+        if(phoneLista != null) {
+            TextPhone.setText(phoneLista);
+        }
+
+
+        //*******************************************
+
 
         listViewClientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -64,19 +88,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String idcliente = TextIdNumber.getText().toString();
+                String nome = TextName.getText().toString();
+                String phone = TextPhone.getText().toString();
 
-                if(idcliente.isEmpty()) {
-                    salvarDados();
-                } else {
-                    alterarDados();
-                }
+                    if(nome.isEmpty() || phone.isEmpty()) {
+                        TextName.requestFocus();
+                        Toast.makeText(MainActivity.this, "Nome e Telefone são obrigatórios", Toast.LENGTH_LONG).show();
+                    } else {
+                        if(idcliente.isEmpty()) {
+                            salvarDados();
+                            listarTodos();
+                            limparCampos();
+                        }else{
+                            alterarDados();
+                            listarTodos();
+                            limparCampos();
+                        }
 
-
+                    }
             }
         });
         btnLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mudarPagina();
                 limparCampos();
             }
         });
@@ -86,17 +121,6 @@ public class MainActivity extends AppCompatActivity {
                 excluirDados();
             }
         });
-        /*
-        btnAlterar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alterarDados();
-                listarTodos();
-                limparCampos();
-                Toast.makeText(MainActivity.this, "Alterado com sucesso!", Toast.LENGTH_LONG).show();
-            }
-        });
-         */
     }
     public void salvarDados() {
         bd.insertCliente(new Cliente(String.valueOf(TextName.getText()),String.valueOf(TextEmailAddress.getText()),String.valueOf(TextPhone.getText())));
