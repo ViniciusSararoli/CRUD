@@ -58,41 +58,30 @@
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/holo_red_light"
-        android:text="limpar"
+        android:text="Excluir"
+        android:backgroundTint="@android:color/holo_red_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAlterar" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSalvar" />
 
     <Button
         android:id="@+id/btnSalvar"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/holo_blue_bright"
         android:text="Salvar"
+        android:backgroundTint="#4CAF50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextEmailAddress" />
 
     <Button
-        android:id="@+id/btnAlterar"
+        android:id="@+id/btnLista"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/holo_blue_light"
-        android:text="Alterar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSalvar" />
-
-    <Button
-        android:id="@+id/btnLista"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:text="Excluir"
+        android:text="Limpar"
+        android:backgroundTint="@android:color/holo_blue_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnExcluir" />
@@ -100,7 +89,7 @@
     <ListView
         android:id="@+id/listViewClientes2"
         android:layout_width="360dp"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLista" />

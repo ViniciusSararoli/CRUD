@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         TextIdNumber = findViewById(R.id.TextIdNumber);
 
         btnSalvar = (Button) findViewById(R.id.btnSalvar);
-        btnAlterar = (Button) findViewById(R.id.btnAlterar);
+        //btnAlterar = (Button) findViewById(R.id.btnAlterar);
         btnLista = (Button) findViewById(R.id.btnLista);
         btnExcluir = (Button) findViewById(R.id.btnExcluir);
 
@@ -63,27 +63,40 @@ public class MainActivity extends AppCompatActivity {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                salvarDados();
+                String idcliente = TextIdNumber.getText().toString();
+
+                if(idcliente.isEmpty()) {
+                    salvarDados();
+                } else {
+                    alterarDados();
+                }
+
+
             }
         });
-        btnExcluir.setOnClickListener(new View.OnClickListener() {
+        btnLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 limparCampos();
             }
         });
-        btnLista.setOnClickListener(new View.OnClickListener() {
+        btnExcluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 excluirDados();
             }
         });
+        /*
         btnAlterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alterarDados();
+                listarTodos();
+                limparCampos();
+                Toast.makeText(MainActivity.this, "Alterado com sucesso!", Toast.LENGTH_LONG).show();
             }
         });
+         */
     }
     public void salvarDados() {
         bd.insertCliente(new Cliente(String.valueOf(TextName.getText()),String.valueOf(TextEmailAddress.getText()),String.valueOf(TextPhone.getText())));
@@ -133,5 +146,7 @@ public class MainActivity extends AppCompatActivity {
         TextName.setText("");
         TextEmailAddress.setText("");
         TextPhone.setText("");
+
+        TextName.requestFocus();
     }
 }
