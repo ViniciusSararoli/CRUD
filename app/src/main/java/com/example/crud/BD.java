@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //https://developer.android.com/training/data-storage/sqlite?hl=pt-br#java
 public class BD extends SQLiteOpenHelper {
     public static final String BANCO_NAME = "crud";
@@ -61,7 +64,7 @@ public class BD extends SQLiteOpenHelper {
         db.close();
     }
 
-    Cliente vertorCliente(int idcliente) {
+    Cliente fetchCliente(int idcliente) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABELA_NAME, new String[] {
@@ -93,5 +96,27 @@ public class BD extends SQLiteOpenHelper {
         db.update(TABELA_NAME, values, COLUNA_IDCLIENTE + " = ? ",
                 new String[] {String.valueOf(cliente.getIdcliente()) });
         db.close();
+    }
+
+    public List<Cliente> vetorCliente() {
+        List<Cliente> listaCliente = new ArrayList<Cliente>();
+
+        String query = "SELECT * FROM " + TABELA_NAME;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        if(c.moveToFirst()) {
+            do {
+                Cliente cl = new Cliente();
+                cl.setIdcliente(Integer.parseInt(c.getString(0)));
+                cl.setNome(c.getString(1));
+                cl.setEmail(c.getString(2));
+                cl.setTelefone(c.getString(3));
+
+                listaCliente.add(cl);
+
+            } while (c.moveToNext());
+        }
+        return listaCliente;
     }
 }

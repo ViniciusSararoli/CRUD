@@ -9,14 +9,24 @@
         //TESTE DELETE
         /*
         Cliente cliente = new Cliente();
-        cliente.setIdcliente(2);
+        cliente.setIdcliente(5);
         bd.deleteCliente(cliente);
         Toast.makeText(MainActivity.this, "Excluido com sucesso!", Toast.LENGTH_LONG).show();
         */
 
         //TESTE SELECT
         /*
-        Cliente cliente = bd.vertorCliente(8);
+        Cliente cliente = bd.fetchCliente(8);
         Toast.makeText(MainActivity.this, cliente.getIdcliente() + " " +cliente.getNome() + " " +cliente.getTelefone() + " " +cliente.getEmail(), Toast.LENGTH_LONG).show();
 
         */
+
+        //TESTE UPDATE
+                Cliente cliente = new Cliente();
+                cliente.setIdcliente(1);
+                cliente.setNome("Teresa Sararoli");
+                cliente.setTelefone("11998253614");
+                cliente.setEmail("teresasararoli@hotmail.com");
+                bd.updateCliente(cliente);
+
+                Toast.makeText(MainActivity.this, "Alterado com sucesso!", Toast.LENGTH_LONG).show();
