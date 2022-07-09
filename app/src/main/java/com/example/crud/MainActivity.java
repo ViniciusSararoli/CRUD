@@ -60,18 +60,60 @@ public class MainActivity extends AppCompatActivity {
                 TextPhone.setText(cliente.getTelefone());
             }
         });
-
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                salvarDados();
+            }
+        });
+        btnExcluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                limparCampos();
+            }
+        });
         btnLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mudarPagina();
+                excluirDados();
             }
         });
+        btnAlterar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alterarDados();
+            }
+        });
+    }
+    public void salvarDados() {
+        bd.insertCliente(new Cliente(String.valueOf(TextName.getText()),String.valueOf(TextEmailAddress.getText()),String.valueOf(TextPhone.getText())));
+        listarTodos();
+        limparCampos();
+        Toast.makeText(MainActivity.this, "Salvo com sucesso!", Toast.LENGTH_LONG).show();
+    }
+    public void alterarDados() {
+        Cliente cliente = new Cliente();
+        cliente.setIdcliente(Integer.parseInt(String.valueOf(TextIdNumber.getText())));
+        cliente.setNome(String.valueOf(TextName.getText()));
+        cliente.setTelefone(String.valueOf(TextPhone.getText()));
+        cliente.setEmail(String.valueOf(TextEmailAddress.getText()));
+        bd.updateCliente(cliente);
+        listarTodos();
+        Toast.makeText(MainActivity.this, "Alterado com sucesso!", Toast.LENGTH_LONG).show();
+
     }
     public void mudarPagina() {
         Intent listacliente = new Intent(this,ListaCliente.class);
         startActivity(listacliente);
 
+    }
+    public void excluirDados() {
+        Cliente cliente = new Cliente();
+        cliente.setIdcliente(Integer.parseInt(String.valueOf(TextIdNumber.getText())));
+        bd.deleteCliente(cliente);
+        listarTodos();
+        limparCampos();
+        Toast.makeText(MainActivity.this, "Excluido com sucesso!", Toast.LENGTH_LONG).show();
     }
     public void listarTodos() {
         List<Cliente> clientes = bd.vetorCliente();
@@ -85,5 +127,11 @@ public class MainActivity extends AppCompatActivity {
             arrayList.add(c.getIdcliente() + "-" + c.getNome()); // + " " + c.getEmail() + " " + c.getTelefone()
             adapter.notifyDataSetChanged();
         }
+    }
+    public void limparCampos() {
+        TextIdNumber.setText("");
+        TextName.setText("");
+        TextEmailAddress.setText("");
+        TextPhone.setText("");
     }
 }
